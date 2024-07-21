@@ -22,8 +22,8 @@ else
     export GIT_PYTHON_GIT_EXECUTABLE="${GIT}"
 fi
 
-# this script cannot be run as root by default
 can_run_as_root=0
+# this script cannot be run as root by default
 
 
 # Disable sentry logging
@@ -43,7 +43,7 @@ then
     install_dir="${SCRIPT_DIR}/../"
     clone_dir="${SCRIPT_DIR##*/}"
 fi
-
+mkdir "${install_dir}"
 cd "${install_dir}"/ || { printf "\e[1m\e[31mERROR: Can't cd to %s/, aborting...\e[0m" "${install_dir}"; exit 1; }
 if [[ -d "${clone_dir}" ]]
 then
