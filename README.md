@@ -69,4 +69,6 @@ that should give you an IP then simply do ```http://<foundIP>:7860/```
 
 and then you should be connected to the UI
 
+it will take a while since the model loading takes ages you can observe by your RAM slowly climbing, best to wait for it
+
 ( If you're not able to connect you might need to run network.ps1 since that Does Some firewall magic I don't understand , however it may not be necessary )
