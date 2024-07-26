@@ -1,5 +1,7 @@
 NOTE: 
 
+confirm working with Windows10 and an RX7900XTX 
+
 This is currently setup for automatic1111, 
 
 AND seems to crash with a RX7900 xtx when generating images greater than 600x600 for some reason, it pops up a driver crash on the Windows side for some reason
