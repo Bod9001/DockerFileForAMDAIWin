@@ -68,3 +68,5 @@ wsl -d ```<DistributionName>``` hostname -I
 that should give you an IP then simply do ```http://<foundIP>:7860/```
 
 and then you should be connected to the UI
+
+( If you're not able to connect you might need to run network.ps1 since that Does Some firewall magic I don't understand , however it may not be necessary )
