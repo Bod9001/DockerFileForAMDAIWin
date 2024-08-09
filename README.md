@@ -4,12 +4,12 @@ confirm working with Windows10 and an RX7900XTX
 
 This is currently setup for automatic1111, 
 
-AND seems to crash with a RX7900 xtx when generating images greater than 600x600 for some reason, it pops up a driver crash on the Windows side for some reason
+good news, I found the source of the crash
+**if you have instant replay turned on it will crash**
+it will crash with a RX7900 xtx when generating images greater than 600x600 , when on the final step
+workaround, turn off instant replay, 
 
-![image](https://github.com/user-attachments/assets/1f9dc3be-0aec-4053-8b5b-4a488c54448f)
-
-All of this is done in an hacky way just to get it working, however I've hit a brick wall with this unexplained crash so Decided to leave it for the meanwhile, if you want to contact me about doing something with this Bod9001 on discord (mainly because I forget to check github notifications)
-
+All of this is done in an hacky way just to get it working, if you want to contact me about doing something with this Bod9001 on discord (mainly because I forget to check github notifications)
 
 the initial model loading takes ages for some reason, haven't worked out how to cash it
 
