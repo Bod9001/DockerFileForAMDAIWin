@@ -5,7 +5,9 @@ confirm working with Windows10 and an RX7900XTX
 This is currently setup for automatic1111, 
 
 good news, I found the source of the crash
-**if you have instant replay turned on it will crash**
+
+## if you have instant replay turned on it will crash
+
 it will crash with a RX7900 xtx when generating images greater than 600x600 , when on the final step
 workaround, turn off instant replay, 
 
