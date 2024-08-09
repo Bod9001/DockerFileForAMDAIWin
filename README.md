@@ -8,7 +8,7 @@ good news, I found the source of the crash
 
 ## if you have instant replay turned on it will crash
 
-it will crash with a RX7900 xtx when generating images greater than 600x600 , when on the final step
+it will crash when generating images greater, when on the final step
 workaround, turn off instant replay, 
 
 All of this is done in an hacky way just to get it working, if you want to contact me about doing something with this Bod9001 on discord (mainly because I forget to check github notifications)
