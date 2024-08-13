@@ -37,7 +37,7 @@ a hefty amount of RAM since the build likes to consume a lot for some reason bes
 memory=50GB
 swap=50GB
 ```
-## step automatic1111
+## how to steps for automatic1111
 
 now, open a terminal to the docker file and run 
 
@@ -75,7 +75,7 @@ it will take a while since the model loading takes ages you can observe by your 
 
 then have fun!
 
-## step comfyUI
+## how to steps for comfyUI
 
 now, open a terminal in /wsl_2_rocm_docker_win and run docker file
 
