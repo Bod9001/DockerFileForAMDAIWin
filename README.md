@@ -15,7 +15,7 @@ All of this is done in an hacky way just to get it working, if you want to conta
 the initial model loading takes ages for some reason, haven't worked out how to cash it
 
 
-Requires
+## Requires
 
 https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-10-21-01-WSL-2.html
 
@@ -37,6 +37,7 @@ a hefty amount of RAM since the build likes to consume a lot for some reason bes
 memory=50GB
 swap=50GB
 ```
+## step automatic1111
 
 now, open a terminal to the docker file and run 
 
@@ -72,4 +73,48 @@ and then you should be connected to the UI
 
 it will take a while since the model loading takes ages you can observe by your RAM slowly climbing, best to wait for it
 
-( If you're not able to connect you might need to run network.ps1 since that Does Some firewall magic I don't understand , however it may not be necessary )
+then have fun!
+
+## step comfyUI
+
+now, open a terminal in /wsl_2_rocm_docker_win and run docker file
+
+docker build -t wsl_2_rocm_docker_win . 
+
+wait for it to finish ( this may take a while )
+
+and now, 
+
+go to /comfy_ui and do 
+
+docker build -t comfy_ui . 
+
+wait for it to finish ( this may take a while )
+
+and now, 
+
+Load up a ubuntu wsl instance,
+
+connect to it and then navigate to the docker compose  in comfy_ui and do
+
+( remembering you have set up the docker integration )
+
+docker compose up
+and then it should load up, 
+
+
+(Of course then provide your own model in the models/checkpoints folder)
+
+you need to then get the internal IP of your wsl container
+
+wsl --list --verbose
+
+then pick out the name for the one you're running the Docker compose on
+
+wsl -d ```<DistributionName>``` hostname -I
+
+that should give you an IP then simply do ```http://<foundIP>:7860/```
+
+and then you should be connected to the UI
+
+if you got the model installed the and everything setup it should work! have fun
