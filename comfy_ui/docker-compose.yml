@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  comfy-ui:
+    image: comfy_ui:latest
+    environment:
+      - LD_LIBRARY_PATH=/usr/lib/wsl/lib
+      - share=True
+      - PIP_BREAK_SYSTEM_PACKAGES=1
+    devices:
+      - /dev/dxg
+    volumes:
+      - type: bind
+        source: /usr/lib/wsl
+        target: /usr/lib/wsl
+      - ./output:/ComfyUI/output/:rw
+      - ./models:/ComfyUI/models/:rw
+    ports:
+      - "8188:8188"
+    entrypoint: ["python3", "/ComfyUI/main.py", "--listen"]
+    #entrypoint: /bin/sh  # Use /bin/bash if you prefer Bash
+    #command: -c "exec /bin/sh"  # Optional: Run a specific command, if needed
+    tty: true
+    #stdin_open: true # docker run -i
