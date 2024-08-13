@@ -2,7 +2,7 @@ NOTE:
 
 confirm working with Windows10 and an RX7900XTX 
 
-This is currently setup for automatic1111, 
+This is currently setup for automatic1111 and comfyUI, 
 
 good news, I found the source of the crash
 
