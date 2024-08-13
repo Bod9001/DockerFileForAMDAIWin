@@ -15,7 +15,7 @@ All of this is done in an hacky way just to get it working, if you want to conta
 the initial model loading takes ages for some reason, haven't worked out how to cash it
 
 
-##Requires
+## Requires
 
 https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-10-21-01-WSL-2.html
 
@@ -37,7 +37,7 @@ a hefty amount of RAM since the build likes to consume a lot for some reason bes
 memory=50GB
 swap=50GB
 ```
-##step automatic1111
+## step automatic1111
 
 now, open a terminal to the docker file and run 
 
@@ -75,7 +75,7 @@ it will take a while since the model loading takes ages you can observe by your 
 
 then have fun!
 
-##step comfyUI
+## step comfyUI
 
 now, open a terminal in /wsl_2_rocm_docker_win and run docker file
 
