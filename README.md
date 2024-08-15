@@ -15,9 +15,9 @@ the initial model loading takes ages for some reason, haven't worked out how to 
 
 ## Requires
 
-https://www.amd.com/en/resources/support-articles/release-notes/RN-RAD-WIN-24-10-21-01-WSL-2.html
+24.7.1 or newer AMD driver software version
 
-an RDNA3 card 7XXX series (because the driver doesn't install on anything else)
+an RDNA3 card 7XXX series, might work with 6XXX? idk Not able to test
 
 docker desktop (when installed go to settings gear icon > resources > wsl integration > Enable Integration with additional distro ( You might need to add one if it's not visible Just search for ubuntu in window search and it comes up and set up) )
 
