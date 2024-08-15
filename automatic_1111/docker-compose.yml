@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  stable-diffusion:
+    image: automatic_1111
+    #command: /bin/bash
+    environment:
+      - LD_LIBRARY_PATH=/usr/lib/wsl/lib
+      - share=True
+      - PIP_BREAK_SYSTEM_PACKAGES=1
+    devices:
+      - /dev/dxg
+    volumes:
+      - type: bind
+        source: /usr/lib/wsl
+        target: /usr/lib/wsl
+      - ./repositories:/stable-diffusion-webui/repositories/:rw
+      - ./models:/stable-diffusion-webui/models/:rw
+      - ./configs:/stable-diffusion-webui/configs/:rw
+      - ./modules:/stable-diffusion-webui/modules/:rw
+      - ./outputs:/stable-diffusion-webui/outputs/:rw
+      - ./gfpgan:/stable-diffusion-webui/gfpgan/:rw
+      - ./ESRGAN:/stable-diffusion-webui/ESRGAN/:rw
+      - ./SwinIR:/stable-diffusion-webui/SwinIR/:rw
+      - ./textual_inversion:/stable-diffusion-webui/textual_inversion/:rw
+      - ./extensions:/stable-diffusion-webui/extensions/:rw      
+      - ./config_states:/stable-diffusion-webui/config_states/:rw
+      - ./node_modules:/stable-diffusion-webui/node_modules/:rw   
+      - ./cache:/stable-diffusion-webui/cache/:rw  
+    ports:
+      - "7860:7860"
+    entrypoint: ["python3", "stable-diffusion-webui/launch.py", "--listen" ]
+    #entrypoint: /bin/sh  # Use /bin/bash if you prefer Bash
+    #command: -c "exec /bin/sh"  # Optional: Run a specific command, if needed
+    tty: true
+    #stdin_open: true # docker run -i
