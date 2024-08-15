@@ -10,9 +10,7 @@ good news, I found the source of the crash
 it will crash when generating images , when on the final step
 workaround, turn off instant replay, 
 
-All of this is done in an hacky way just to get it working, if you want to contact me about doing something with this Bod9001 on discord (mainly because I forget to check github notifications)
-
-the initial model loading takes ages for some reason, haven't worked out how to cash it
+the initial model loading takes ages for some reason, haven't worked out how to cash it on automatic_1111
 
 
 ## Requires
@@ -39,9 +37,17 @@ swap=50GB
 ```
 ## How to steps for automatic1111
 
-now, open a terminal to the docker file and run 
+now, open a terminal in /wsl_2_rocm_docker_win and run docker file (if you haven't Built it already)
 
-docker build -t stable-diffusion-amd-wsl . 
+docker build -t wsl_2_rocm_docker_win . 
+
+wait for it to finish ( this may take a while )
+
+and then, 
+
+go to /automatic_1111 and do 
+
+docker build -t automatic_1111 . 
 
 wait for it to finish ( this may take a while )
 
@@ -77,7 +83,7 @@ then have fun!
 
 ## How to steps for comfyUI
 
-now, open a terminal in /wsl_2_rocm_docker_win and run docker file
+now, open a terminal in /wsl_2_rocm_docker_win and run docker file (if you haven't Built it already)
 
 docker build -t wsl_2_rocm_docker_win . 
 
