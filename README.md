@@ -1,5 +1,15 @@
 NOTE: 
 
+you may need to install the amd drivers on the ubuntu WSL2 instance your running the docker compose from,
+if so do
+
+apt-get install -y wget
+wget https://repo.radeon.com/amdgpu-install/6.1.3/ubuntu/jammy/amdgpu-install_6.1.60103-1_all.deb
+apt-get install -y ./amdgpu-install_6.1.60103-1_all.deb
+amdgpu-install -y --usecase=wsl,rocm --no-dkms
+
+(will test tomorrow)
+
 confirm working with Windows10 and an RX7900XTX 
 
 This is currently setup for automatic1111 and comfyUI, 
