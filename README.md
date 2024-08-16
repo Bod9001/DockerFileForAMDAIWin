@@ -133,7 +133,42 @@ then pick out the name for the one you're running the Docker compose on
 
 wsl -d ```<DistributionName>``` hostname -I
 
-that should give you an IP then simply do ```http://<foundIP>:7860/```
+that should give you an IP then simply do ```http://<foundIP>:8188/```
+
+and then you should be connected to the UI
+
+if you got the model installed the and everything setup it should work! have fun
+
+## How to steps for Swarm UI
+so, First off follow the comfy UI  steps until  Load up a ubuntu wsl instance,
+now 
+go to /swarm_ui and do 
+
+docker build -t swarm_ui . 
+
+wait for it to finish ( this may take a while )
+
+and now 
+Load up a ubuntu wsl instance,
+
+connect to it and then navigate to the docker compose  in swarm_ui and do
+
+( remembering you have set up the docker integration )
+
+docker compose up
+and then it should load up, 
+
+(Of course then provide your own model in the models/checkpoints/OfficialStableDiffusion ( So it aligns nicely with what swarm UI Wants ) folder)
+
+you need to then get the internal IP of your wsl container
+
+wsl --list --verbose
+
+then pick out the name for the one you're running the Docker compose on
+
+wsl -d ```<DistributionName>``` hostname -I
+
+that should give you an IP then simply do ```http://<foundIP>:7801/```
 
 and then you should be connected to the UI
 
