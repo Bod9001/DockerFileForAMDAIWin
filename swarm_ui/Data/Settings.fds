@@ -1,0 +1,258 @@
+#Settings related to file paths.
+Paths:
+	#Root path for model files. Use a full-formed path (starting with '/' or a Windows drive like 'C:') to use an absolute path.
+	#Defaults to 'Models'.
+	ModelRoot: Models
+	#The model folder to use within 'ModelRoot'.
+	#Defaults to 'Stable-Diffusion'.
+	#Absolute paths work too.
+	SDModelFolder: Stable-Diffusion
+	#The LoRA (or related adapter type) model folder to use within 'ModelRoot'.
+	#Defaults to 'Lora'.
+	#Absolute paths work too.
+	SDLoraFolder: Lora
+	#The VAE (autoencoder) model folder to use within 'ModelRoot'.
+	#Defaults to 'VAE'.
+	#Absolute paths work too.
+	SDVAEFolder: VAE
+	#The Embedding (eg textual inversion) model folder to use within 'ModelRoot'.
+	#Defaults to 'Embeddings'.
+	#Absolute paths work too.
+	SDEmbeddingFolder: Embeddings
+	#The ControlNets model folder to use within 'ModelRoot'.
+	#Defaults to 'controlnet'.
+	#Absolute paths work too.
+	SDControlNetsFolder: controlnet
+	#The CLIP Vision model folder to use within 'ModelRoot'.
+	#Defaults to 'clip_vision'.
+	#Absolute paths work too.
+	SDClipVisionFolder: clip_vision
+	#Root path for data (user configs, etc).
+	#Defaults to 'Data'
+	DataPath: Data
+	#Root path for output files (images, etc).
+	#Defaults to 'Output'
+	OutputPath: Output
+	#The folder for wildcard (.txt) files, under Data.
+	#Defaults to 'Wildcards'
+	WildcardsFolder: Wildcards
+	#When true, output paths always have the username as a folder.
+	#When false, this will be skipped.
+	#Keep this on in multi-user environments.
+	AppendUserNameToOutputPath: true
+	#If true, model metadata is tracked on a per-folder basis. This is better for example if you copy model folders to different machines, or have symlinks to different instances, or etc.
+	#If false, model metadata is tracked in the central data folder. This is better if you don't want stray files in your model folders, or if you have several Swarm instances running simultaneously.
+	ModelMetadataPerFolder: true
+	#If true, image metadata is tracked on a per-folder basis.
+	#If false, image metadata is tracked in the central data folder.
+	#This is better if you don't want stray files in your output folders, or if you have several Swarm instances running simultaneously over the same output folders.
+	ImageMetadataPerFolder: true
+#Settings related to networking and the webserver.
+Network:
+	#What web host address to use. `localhost` means your PC only.
+	#Linux users may use `0.0.0.0` to mean accessible to anyone that can connect to your PC (ie LAN users, or the public if your firewall is open).
+	#Windows users may use `*` for that, though it may require additional Windows firewall configuration.
+	#Advanced server users may wish to manually specify a host bind address here.
+	Host: 0.0.0.0
+	#What web port to use. Default is '7801'.
+	Port: 7801
+	#If true, if the port is already in use, the server will try to find another port to use instead.
+	#If false, the server will fail to start if the port is already in use.
+	PortCanChange: true
+	#Backends are automatically assigned unique ports. This value selects which port number to start the assignment from.
+	#Default is '7820'.
+	BackendStartingPort: 7820
+	#If you wish to access your Swarm instance externally, set this to the path of a CloudFlared executable, and it will automatically be used.
+	#(Must restart to apply).
+	#The URL will be visible on the Server Info tab and/or terminal log.
+	CloudflaredPath: \x
+#Restrictions to apply to default users.
+DefaultUserRestriction:
+	#How many directories deep a user's custom OutPath can be.
+	#Default is 5.
+	MaxOutPathDepth: 5
+	#Which user-settings the user is allowed to modify.
+	#Default is all of them.
+	AllowedSettings:
+	- *
+	#If true, the user is treated as a full admin.
+	#This includes the ability to modify these settings.
+	Admin: false
+	#If true, user may load models.
+	#If false, they may only use already-loaded models.
+	CanChangeModels: true
+	#What models are allowed, as a path regex.
+	#Directory-separator is always '/'. Can be '.*' for all, 'MyFolder/.*' for only within that folder, etc.
+	#Default is all.
+	AllowedModels: .*
+	#Generic permission flags. '*' means all.
+	#Default is all.
+	PermissionFlags:
+	- *
+	#How many images can try to be generating at the same time on this user.
+	MaxT2ISimultaneous: 32
+	#Whether the '.' symbol can be used in OutPath - if enabled, users may cause file system issues or perform folder escapes.
+	AllowUnsafeOutpaths: false
+#Default settings for users (unless the user modifies them, if so permitted).
+#(NOTE: Usually, don't edit this. Go to the 'User' tab to edit your User-Settings).
+DefaultUser:
+	#Settings related to output path building.
+	OutPathBuilder:
+		#Builder for output file paths. Can use auto-filling placeholders like '[model]' for the model name, '[prompt]' for a snippet of prompt text, etc.
+		#Full details in <a target="_blank" href="https://github.com/Stability-AI/StableSwarmUI/blob/master/docs//User%20Settings.md#path-format">the docs here</a>
+		Format: raw/[year]-[month]-[day]/[hour][minute]-[prompt]-[model]-[seed]
+		#How long any one part can be.
+		#Default is 40 characters.
+		MaxLenPerPart: 40
+		#If true, when including model name (or loras or etc), the path will skip the folder (ie filename only).
+		ModelPathsSkipFolders: false
+	#Settings related to saved file format.
+	FileFormat:
+		#What format to save images in.
+		#Default is '.png', but '.jpg' is recommended to save some filespace.
+		ImageFormat: PNG
+		#Whether to store metadata into saved images.
+		#Defaults enabled.
+		SaveMetadata: true
+		#If set to non-0, adds DPI metadata to saved images.
+		#'72' is a good value for compatibility with some external software.
+		DPI: 0
+		#If set to true, a '.txt' file will be saved alongside images with the image metadata easily viewable.
+		#This can work even if saving in the image is disabled. Defaults disabled.
+		SaveTextFileMetadata: false
+	#Whether your files save to server data drive or not.
+	SaveFiles: true
+	#If true, folders will be discard from starred image paths.
+	StarNoFolders: false
+	#What theme to use. Default is 'modern_dark'.
+	Theme: modern_dark
+	#If true, images in the main center area will always grow to better fill the screen.
+	CenterImageAlwaysGrow: false
+	#If true, when 'Auto Swap To Images' is enabled, and you have FullView open, the FullView will also be swapped.
+	#If false, the FullView will not change.
+	AutoSwapImagesIncludesFullView: false
+	#If enabled, batch size will be reset to 1 when parameters are loaded.
+	#This can prevent accidents that might thrash your GPU or cause compatibility issues, especially for example when importing a comfy workflow.
+	#You can still set the batch size at will in the GUI.
+	ResetBatchSizeToOne: false
+	#The format for parameter hints to display as.
+	#Default is 'BUTTON'.
+	HintFormat: BUTTON
+	#Options to override default VAEs with.
+	VAEs:
+		#What VAE to use with SDXL models by default. Use 'None' to use the one in the model.
+		DefaultSDXLVAE: None
+		#What VAE to use with SDv1 models by default. Use 'None' to use the one in the model.
+		DefaultSDv1VAE: None
+	#When generating live previews, this is how many simultaneous generation requests can be waiting at one time.
+	MaxSimulPreviews: 1
+	#Set to a number above 1 to allow generations of multiple images to automatically generate square mini-grids when they're done.
+	MaxImagesInMiniGrid: 1
+	#How many images the history view should stop trying to load after.
+	MaxImagesInHistory: 1000
+	#How many images the history view should scan server-side before deciding the list is sufficient for sorting. Not relevant when sorting by filename.
+	MaxImagesScannedInHistory: 10000
+	#If true, the Image History view will cache small preview thumbnails of images.
+	#This should make things run faster. You can turn it off if you don't want that.
+	ImageHistoryUsePreviews: true
+	#Delay, in seconds, betweeen Generate Forever updates.
+	#If the delay hits and a generation is still waiting, it will be skipped.
+	#Default is 0.1 seconds.
+	GenerateForeverDelay: 0.1
+	#What language to display the UI in.
+	#Default is 'en' (English).
+	Language: en
+	#Comma-separated list of parameters to exclude from 'Reuse Parameters'.
+	#For example, set 'model' to not copy the model, or 'model,refinermodel,videomodel' to really never copy any models.
+	ReuseParamExcludeList: \x
+	#Optional source file for auto-completion texts (inside Data/Autocompletions).
+	#See <a target="_blank" href="https://github.com/Stability-AI/StableSwarmUI/blob/master/docs//Features/Autocompletions.md#word-lists">docs/Features/Autocompletions</a> for info.
+	AutoCompletionsSource: \x
+#Settings related to backends.
+Backends:
+	#How many times to retry initializing a backend before giving up. Default is 3.
+	MaxBackendInitAttempts: 3
+	#Safety check, the maximum duration all requests can be waiting for a backend before the system declares a backend handling failure.
+	MaxTimeoutMinutes: 20
+	#The maximum duration an individual request can be waiting on a backend to be available before giving up.
+	#Not to be confused with 'MaxTimeoutMinutes' which requires backends be unresponsive for that duration, this duration includes requests that are merely waiting because other requests are queued.
+	#Defaults to 60 * 24 * 7 = 1 week (ultra-long max queue duration).
+	PerRequestTimeoutMinutes: 10080
+	#The maximum number of pending requests to continue forcing orderly processing of.
+	#Over this limit, requests may start going out of order.
+	MaxRequestsForcedOrder: 20
+	#How many minutes to wait after the last generation before automatically freeing up VRAM (to prevent issues with other programs).
+	#This has the downside of a small added bit of time to load back onto VRAM at next usage.
+	#Use a decimal number to free after seconds.
+	#Defaults to 10 minutes.
+	ClearVRAMAfterMinutes: 10
+	#How many minutes to wait after the last generation before automatically freeing up system RAM (to prevent issues with other programs).
+	#This has the downside of causing models to fully load from data drive at next usage.
+	#Use a decimal number to free after seconds.
+	#Defaults to 60 minutes (one hour).
+	ClearSystemRAMAfterMinutes: 60
+	#If true, any time you load the UI, trigger a server refresh.
+	#If false, only triggers a refresh if you restart Swarm or trigger a refresh manually from the Quick Tools menu.
+	#Defaults to true.
+	AlwaysRefreshOnLoad: true
+#If this is set to 'true', hides the installer page. If 'false', the installer page will be shown.
+IsInstalled: true
+#Ratelimit, in milliseconds, between Nvidia GPU status queries. Default is 1000 ms (1 second).
+NvidiaQueryRateLimitMS: 1000
+#How to launch the UI. If 'none', just quietly launch.
+#If 'web', launch your web-browser to the page.
+#If 'webinstall', launch web-browser to the install page.
+#If 'electron', launch the UI in an electron window (NOT YET IMPLEMENTED).
+LaunchMode: web
+#If set true, some additional debugging data will be attached where relevant, such as in image metadata.
+AddDebugData: false
+#If set true, new/upcoming/experimental features will be visible.
+ShowExperimentalFeatures: false
+#If true, Swarm will check if there's any updates available during startup. If false, it will not check for updates.
+#Update check only downloads a simple JSON from GitHub to get the current version info, it does not transmit any telemetry nor does it download any files or apply the update.
+#Defaults to true.
+CheckForUpdates: true
+#If true, Swarm will automatically download and apply any development version updates as soon as they're available.
+#Defaults to false.
+AutoPullDevUpdates: false
+#Settings related to logging.
+Logs:
+	#The minimum tier of logs that should be visible in the console and saved to file.
+	#Default is 'info'.
+	LogLevel: Info
+	#If true, logs will be saved to a file. If false, logs will be available in console and UI while running, but never saved to file.
+	#Defaults to false.
+	#Must restart Swarm to apply.
+	SaveLogToFile: false
+	#The path for where to store log file, parsed at time of program start, relative to the Data directory.
+	#Must restart Swarm to apply.
+	#Can use [year], [month], [month_name], [day], [day_name], [hour], [minute], [second], [pid].
+	LogsPath: Logs/[year]-[month]/[day]-[hour]-[minute].log
+#Settings related to the User Interface.
+UI:
+	#Optionally specify a (raw HTML) welcome message here. If specified, will override the automatic welcome messages.
+	OverrideWelcomeMessage: \x
+#Settings related to webhooks.
+WebHooks:
+	#Webhook to call (empty JSON POST) when queues are starting up from idle.
+	#Leave empty to disable any webhook.
+	#Call must return before the first generation starts.
+	QueueStartWebhook: \x
+	#Webhook to call (empty JSON POST) when all queues are done and the server is going idle.
+	#Leave empty to disable any webhook.
+	#Call must return before queuing may restart.
+	QueueEndWebhook: \x
+	#How long to wait (in seconds) after all queues are done before sending the queue end webhook.
+	#This is useful to prevent rapid start+end calls.
+	QueueEndDelay: 1
+#Settings related to server performance.
+Performance:
+	#How likely an outdated image metadata entry is to be revalidated (ie have it's mtime checked against storage) each time an image's metadata is pulled.
+	#Default 0.05 means 5% chance.
+	#SSD users can safely set it higher. HDD users may be happier setting it to 0.
+	#Metadata is always loaded the first time an image is seen.
+	ImageDataValidationChance: 0.05
+	#Can be enabled to cache certain backend data.
+	#For example, with ComfyUI backends this will add an extended cache on the object_info data.
+	#Defaults to false.
+	DoBackendDataCache: false
