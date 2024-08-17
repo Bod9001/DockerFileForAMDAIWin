@@ -59,8 +59,10 @@ connect to it using the terminal , searching for ubuntu should bring up the term
 
 and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
 
-then run 
+then run
+
 ( remembering you have set up the docker integration )
+
 sudo docker compose up 
 
 wait for it to download and when it says it's running in docker desktop then press
@@ -117,7 +119,9 @@ connect to it using the terminal , searching for ubuntu should bring up the term
 and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
 
 then run 
+
 ( remembering you have set up the docker integration )
+
 sudo docker compose up
 
 wait for it to download and when it says it's running in docker desktop then press
@@ -166,7 +170,9 @@ and now, go to WSL2_set_up ( why? because for some reason if you don't run a nor
 then run 
 
 then run 
+
 ( remembering you have set up the docker integration )
+
 sudo docker compose up
 
 wait for it to download and when it says it's running in docker desktop then press
