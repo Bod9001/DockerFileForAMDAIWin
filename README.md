@@ -37,6 +37,9 @@ a hefty amount of RAM since the build likes to consume a lot for some reason bes
 memory=50GB
 swap=50GB
 ```
+and then  Restart wsl with this in Windows terminal wsl --shutdown
+then docker desktop should prompt to restart wsl and you allow it to do  so
+
 ## How to steps for automatic1111
 
 now, open a terminal in /wsl_2_rocm_docker_win and run docker file (if you haven't Built it already)
