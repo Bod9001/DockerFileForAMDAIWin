@@ -57,9 +57,11 @@ connect to it using the terminal , searching for ubuntu should bring up the term
 
 and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
 
-then run sudo WSL2_set_up
+then run 
+( remembering you have set up the docker integration )
+sudo docker compose up 
 
-wait for it to download and was it says it's running in docker desktop then press
+wait for it to download and when it says it's running in docker desktop then press
 
 ctrl+c to exit out of it (or close  in docker desktop )
 
@@ -67,7 +69,6 @@ go to
 
 and then navigate to the compose and do
 
-( remembering you have set up the docker integration )
 
 sudo docker compose up
 
@@ -113,17 +114,17 @@ connect to it using the terminal , searching for ubuntu should bring up the term
 
 and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
 
-then run sudo WSL2_set_up
+then run 
+( remembering you have set up the docker integration )
+sudo docker compose up
 
-wait for it to download and was it says it's running in docker desktop then press
+wait for it to download and when it says it's running in docker desktop then press
 
 ctrl+c to exit out of it (or close  in docker desktop )
 
 go to 
 
 navigate to the docker compose  in comfy_ui and do
-
-( remembering you have set up the docker integration )
 
 sudo docker compose up
 and then it should load up, 
@@ -160,17 +161,19 @@ connect to it using the terminal , searching for ubuntu should bring up the term
 
 and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
 
-then run sudo WSL2_set_up
+then run 
 
-wait for it to download and was it says it's running in docker desktop then press
+then run 
+( remembering you have set up the docker integration )
+sudo docker compose up
+
+wait for it to download and when it says it's running in docker desktop then press
 
 ctrl+c to exit out of it (or close  in docker desktop )
 
 go to 
 
- navigate to the docker compose  in swarm_ui and do
-
-( remembering you have set up the docker integration )
+navigate to the docker compose  in swarm_ui and do
 
 sudo docker compose up
 and then it should load up, 
