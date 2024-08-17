@@ -204,3 +204,60 @@ that should give you an IP then simply do ```http://<foundIP>:7801/```
 and then you should be connected to the UI
 
 if you got the model installed the and everything setup it should work! have fun
+
+## How to steps for forge_ui
+
+
+now, open a terminal in /wsl_2_rocm_docker_win and run docker file (if you haven't Built it already)
+
+docker build -t wsl_2_rocm_docker_win . 
+
+wait for it to finish ( this may take a while )
+
+and then, 
+
+go to /forge_ui and do 
+
+docker build -t forge_ui . 
+
+wait for it to finish ( this may take a while )
+
+Load up a ubuntu wsl instance,
+
+connect to it using the terminal , searching for ubuntu should bring up the terminal in Windows
+
+and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
+
+then run
+
+( remembering you have set up the docker integration )
+
+sudo docker compose up 
+
+wait for it to download and when it says it's running in docker desktop then press
+
+ctrl+c to exit out of it (or close  in docker desktop )
+
+go to 
+
+and then navigate to the compose in forge_ui and do
+
+sudo docker compose up
+
+(it will download a few extra requirements since not quite sure how to pin them down)
+
+and then it should load up, 
+
+you need to then get the internal IP of your wsl container
+
+wsl --list --verbose
+
+then pick out the name for the one you're running the Docker compose on
+
+wsl -d ```<DistributionName>``` hostname -I
+
+that should give you an IP then simply do ```http://<foundIP>:7860/```
+
+and then you should be connected to the UI
+
+then have fun!
