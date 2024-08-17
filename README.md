@@ -4,7 +4,7 @@ docker is a bit weird inside of the virtual WSL2 Linux so you'll have to run a p
 
 confirm working with Windows10 and an RX7900XTX 
 
-This is currently setup for automatic1111 and comfyUI, 
+This is currently setup for automatic1111 and comfyUI and swarmUI (with comfyUI backend), 
 
 good news, I found the source of the crash
 
