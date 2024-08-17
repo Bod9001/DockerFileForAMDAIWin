@@ -1,0 +1,8 @@
+services:
+  ubuntulatest:
+    image: ubuntu:latest
+    volumes:
+      - type: bind
+        source: /usr/lib/wsl
+        target: /usr/lib/wsl
+    tty: true
