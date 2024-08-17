@@ -71,7 +71,7 @@ ctrl+c to exit out of it (or close  in docker desktop )
 
 go to 
 
-and then navigate to the compose and do
+and then navigate to the compose in automatic_1111 and do
 
 
 sudo docker compose up
@@ -130,7 +130,7 @@ ctrl+c to exit out of it (or close  in docker desktop )
 
 go to 
 
-navigate to the docker compose  in comfy_ui and do
+navigate to the docker compose in comfy_ui and do
 
 sudo docker compose up
 and then it should load up, 
@@ -181,7 +181,7 @@ ctrl+c to exit out of it (or close  in docker desktop )
 
 go to 
 
-navigate to the docker compose  in swarm_ui and do
+navigate to the docker compose in swarm_ui and do
 
 sudo docker compose up
 and then it should load up, 
