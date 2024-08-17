@@ -1,22 +1,10 @@
 NOTE: 
 
-you may need to install the amd drivers on the ubuntu WSL2 instance your running the docker compose from,
-if so do
-
-apt-get install -y wget
-
-wget https://repo.radeon.com/amdgpu-install/6.1.3/ubuntu/jammy/amdgpu-install_6.1.60103-1_all.deb
-
-apt-get install -y ./amdgpu-install_6.1.60103-1_all.deb
-
-amdgpu-install -y --usecase=wsl,rocm --no-dkms
-
-
-(will test tomorrow)
+docker is a bit weird inside of the virtual WSL2 Linux so you'll have to run a plane docker composed before it will allow the GPU pass through to work for some reason ( is part of the guide so don't worry too much )
 
 confirm working with Windows10 and an RX7900XTX 
 
-This is currently setup for automatic1111 and comfyUI, 
+This is currently setup for automatic1111 and comfyUI and swarmUI (with comfyUI backend), 
 
 good news, I found the source of the crash
 
@@ -65,15 +53,28 @@ docker build -t automatic_1111 .
 
 wait for it to finish ( this may take a while )
 
-and now, 
-
 Load up a ubuntu wsl instance,
 
-connect to it and then navigate to the compose and do
+connect to it using the terminal , searching for ubuntu should bring up the terminal in Windows
+
+and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
+
+then run
 
 ( remembering you have set up the docker integration )
 
-docker compose up
+sudo docker compose up 
+
+wait for it to download and when it says it's running in docker desktop then press
+
+ctrl+c to exit out of it (or close  in docker desktop )
+
+go to 
+
+and then navigate to the compose in automatic_1111 and do
+
+
+sudo docker compose up
 
 (it will download a few extra requirements since not quite sure how to pin them down)
 
@@ -111,17 +112,28 @@ docker build -t comfy_ui .
 
 wait for it to finish ( this may take a while )
 
-and now, 
-
 Load up a ubuntu wsl instance,
 
-connect to it and then navigate to the docker compose  in comfy_ui and do
+connect to it using the terminal , searching for ubuntu should bring up the terminal in Windows
+
+and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
+
+then run 
 
 ( remembering you have set up the docker integration )
 
-docker compose up
-and then it should load up, 
+sudo docker compose up
 
+wait for it to download and when it says it's running in docker desktop then press
+
+ctrl+c to exit out of it (or close  in docker desktop )
+
+go to 
+
+navigate to the docker compose in comfy_ui and do
+
+sudo docker compose up
+and then it should load up, 
 
 (Of course then provide your own model in the models/checkpoints folder)
 
@@ -151,11 +163,27 @@ wait for it to finish ( this may take a while )
 and now 
 Load up a ubuntu wsl instance,
 
-connect to it and then navigate to the docker compose  in swarm_ui and do
+connect to it using the terminal , searching for ubuntu should bring up the terminal in Windows
+
+and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
+
+then run 
+
+then run 
 
 ( remembering you have set up the docker integration )
 
-docker compose up
+sudo docker compose up
+
+wait for it to download and when it says it's running in docker desktop then press
+
+ctrl+c to exit out of it (or close  in docker desktop )
+
+go to 
+
+navigate to the docker compose in swarm_ui and do
+
+sudo docker compose up
 and then it should load up, 
 
 (Of course then provide your own model in the models/checkpoints/OfficialStableDiffusion ( So it aligns nicely with what swarm UI Wants ) folder)
