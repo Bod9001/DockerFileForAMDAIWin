@@ -2,6 +2,8 @@ NOTE:
 
 docker is a bit weird inside of the virtual WSL2 Linux so you'll have to run a plane docker composed before it will allow the GPU pass through to work for some reason ( is part of the guide so don't worry too much )
 
+it seems for me every time after a computer restart? I have to run the WSL2_set_up then exit out with ctrl + c then run the thing I want to run otherwise it complains about a missing bind
+
 confirm working with Windows10 and an RX7900XTX 
 
 This is currently setup for automatic1111 , comfyUI , swarmUI (with comfyUI backend) and forge_ui, 
