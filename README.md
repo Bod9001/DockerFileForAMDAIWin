@@ -32,7 +32,9 @@ plenty of free storage space,  maybe like 50gb? (for docker you can specify wher
  
 a hefty amount of RAM since the build likes to consume a lot for some reason best set in your WSL config 
 
-```C:\Users\<account name>\.wslconfig```
+```C:\Users\<account name>\.wslconfig``` 
+
+( if not present add it, make sure to turn on file extensions in Windows Explorer so you **don't** get something like .wslconfig.txt )
 
 ```
 [wsl2]
