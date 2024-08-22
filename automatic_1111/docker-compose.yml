@@ -16,7 +16,6 @@ services:
         target: /usr/lib/wsl
       - ./repositories:/stable-diffusion-webui/repositories/:rw
       - ./models:/stable-diffusion-webui/models/:rw
-      - ./configs:/stable-diffusion-webui/configs/:rw
       - ./outputs:/stable-diffusion-webui/outputs/:rw
       - ./gfpgan:/stable-diffusion-webui/gfpgan/:rw
       - ./ESRGAN:/stable-diffusion-webui/ESRGAN/:rw
