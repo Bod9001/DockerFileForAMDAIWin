@@ -4,11 +4,11 @@ WORKDIR /
 
 RUN apt install -y git
 
+RUN git config --global --add safe.directory '*'
+
 RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 
 RUN pip3 install -r /stable-diffusion-webui/requirements.txt
-
-RUN git config --global --add safe.directory '*'
 
 # Expose necessary port
 EXPOSE 7860
