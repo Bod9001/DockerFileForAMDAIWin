@@ -22,6 +22,7 @@ the initial model loading takes ages for some reason, haven't worked out how to 
 24.7.1 or newer AMD driver software version
 
 an RDNA3 card 7XXX series, might work with 6XXX? idk Not able to test
+someone tried a RX 6950 XT and the GPU was being recognised in the container, no confirmation on if it worked properly tho
 
 docker desktop (when installed go to settings gear icon > resources > wsl integration > Enable Integration with additional distro ( You might need to add one if it's not visible Just search for ubuntu in window search and it comes up and set up) )
 
