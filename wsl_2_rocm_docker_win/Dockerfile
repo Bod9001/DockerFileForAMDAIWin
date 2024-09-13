@@ -88,7 +88,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1 &
 # Set default python version (optional)
 RUN update-alternatives --set python /usr/bin/python3.10
 
-RUN pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/rocm6.2
+RUN pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/rocm6.1
 
 RUN pip3 install -U setuptools
 
