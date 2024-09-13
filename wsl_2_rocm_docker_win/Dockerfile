@@ -58,8 +58,8 @@ RUN apt-get install -y ./libncurses5_6.2-0ubuntu2.1_amd64.deb
 RUN wget https://mirrors.edge.kernel.org/ubuntu/pool/main/m/mime-support/mime-support_3.66_all.deb
 RUN apt-get install -y ./mime-support_3.66_all.deb
 
-RUN wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.22_amd64.deb
-RUN apt-get install -y ./libssl1.1_1.1.1f-1ubuntu2.22_amd64.deb
+RUN wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl3t64_3.0.13-0ubuntu3.4_amd64.deb
+RUN apt-get install -y ./libssl3t64_3.0.13-0ubuntu3.4_amd64.deb
 
 RUN wget https://mirrors.edge.kernel.org/ubuntu/pool/universe/libf/libffi7/libffi7_3.3-5ubuntu1_amd64.deb
 RUN apt-get install -y ./libffi7_3.3-5ubuntu1_amd64.deb
@@ -88,7 +88,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1 &
 # Set default python version (optional)
 RUN update-alternatives --set python /usr/bin/python3.10
 
-RUN pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/rocm6.1
+RUN pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/rocm6.2
 
 RUN pip3 install -U setuptools
 
