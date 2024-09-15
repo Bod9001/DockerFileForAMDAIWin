@@ -16,9 +16,13 @@ services:
       - ./output:/ComfyUI/output/:rw
       - ./models:/ComfyUI/models/:rw
       - ./custom_nodes:/ComfyUI/custom_nodes/:rw
+      - ./InstallCustomNodes.py:/ComfyUI/InstallCustomNodes.py
+      # Mount the script into the container
     ports:
       - "8188:8188"
-    entrypoint: ["python3", "/ComfyUI/main.py", "--listen"]
+    #command: 
+    entrypoint: ["python3", "/ComfyUI/InstallCustomNodes.py"]
+    #entrypoint: ["python3", "/ComfyUI/main.py", "--listen"]
     #command: rocminfo
     #entrypoint: /bin/sh  # Use /bin/bash if you prefer Bash
     #command: -c "exec /bin/sh"  # Optional: Run a specific command, if needed
