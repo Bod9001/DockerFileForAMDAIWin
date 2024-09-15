@@ -42,6 +42,9 @@ a hefty amount of RAM since the build likes to consume a lot for some reason bes
 memory=50GB
 swap=50GB
 ```
+(Once you finish building your images It's advisable to turn memory back down to something that doesn't consume all your memory on your computer, 
+since (docker) Linux does that thing where it thinks it's free memory so fills it up with random stuff but Windows doesn't know about that so you end up with your memory being filled up)
+
 and then  Restart wsl with this in Windows terminal wsl --shutdown
 then docker desktop should prompt to restart wsl and you allow it to do  so
 
