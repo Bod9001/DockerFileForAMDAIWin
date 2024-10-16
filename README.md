@@ -1,6 +1,9 @@
 NOTE: 
 
 haven't been able to get flux.dev working it always freezes up the entire computer when processing vae tell me if you manage to get past this for flux.dev
+technically fixed it I think it's an issue with VAE steps in the driver, I recently upgraded to 64GB of ram from 32GB, and when the point it would usually crash when doing the VAE, 
+it is when it spikes up in memory and Does the same thing but doesn't crash, 
+remedy? if you don't have the hardware may be temporarily increasing your ram cash/whatever it's called file so it can temporarily allocate it, interestingly don't seem to spike after it's done it 1st/2nd time, Probably some JIT compiling on the AMD side using too much memory  
 
 docker is a bit weird inside of the virtual WSL2 Linux so you'll have to run a plane docker composed before it will allow the GPU pass through to work for some reason ( is part of the guide so don't worry too much )
 
