@@ -1,4 +1,12 @@
 NOTE: 
+Update: 05/12/2024 
+
+looks like AMD is providing their own prebuilt images if you would like to use the those, however the pretty chunky 
+https://hub.docker.com/r/rocm/pytorch/tags
+and
+they updated the rocm version for WSL  (Link has docker instructions to)
+https://rocm.docs.amd.com/projects/radeon/en/latest/docs/install/wsl/install-pytorch.html
+I need to update the version that's being used in the repo, and do some tests
 
 ~~haven't been able to get flux.dev working it always freezes up the entire computer when processing vae tell me if you manage to get past this for flux.dev~~
 technically fixed it I think it's an issue with VAE steps in the driver, I recently upgraded to 64GB of ram from 32GB, and when the point it would usually crash when doing the VAE, 
