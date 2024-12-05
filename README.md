@@ -5,7 +5,7 @@ looks like AMD is providing their own prebuilt images if you would like to use t
 https://hub.docker.com/r/rocm/pytorch/tags
 and
 they updated the rocm version for WSL  (Link has docker instructions to)
-https://rocm.docs.amd.com/projects/radeon/en/latest/docs/install/wsl/install-pytorch.html
+https://rocm.docs.amd.com/projects/radeon/en/latest/docs/install/wsl/install-radeon.html
 I need to update the version that's being used in the repo, and do some tests
 
 ~~haven't been able to get flux.dev working it always freezes up the entire computer when processing vae tell me if you manage to get past this for flux.dev~~
