@@ -1,7 +1,7 @@
 NOTE:
 Update: 21/12/2024 
 so, tested automatic1111 and comfy UI with the updated packages rocm-rel-6.2.3 do note it has to manually remove the dependencies for the Nvidia version of py torch with comfy UI when installing the requirements, so that might be issues with some other ones, 
-anyway, I tried getting the official image running but my computer couldn't even handle downloading it Because I think it tries extracting it then runs out of memory ( even though I have  64 GB, if you know a setting to stop it just gobbling the ram when extracting archives please do say ), but otherwise seems to work, <testing flux in comfy UI will be a second>
+anyway, I tried getting the official image running but my computer couldn't even handle downloading it Because I think it tries extracting it then runs out of memory ( even though I have  64 GB, if you know a setting to stop it just gobbling the ram when extracting archives please do say ), but otherwise seems to work, testing flux in comfy UI will be a second
 
 Update: 05/12/2024 
 
