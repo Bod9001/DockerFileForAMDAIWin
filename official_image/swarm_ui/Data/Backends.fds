@@ -1,0 +1,13 @@
+0:
+	type: comfyui_api
+	title: ComfyUI API By URL
+	enabled: true
+	settings:
+		#The address of the ComfyUI instance, eg 'http://localhost:8188'.
+		Address: http://comfy-ui:8188
+		#Whether the backend is allowed to revert to an 'idle' state if the API address is unresponsive.
+		#An idle state is not considered an error, but cannot generate.
+		#It will automatically return to 'running' if the API becomes available.
+		AllowIdle: true
+		#How many extra requests may queue up on this backend while one is processing.
+		OverQueue: 1

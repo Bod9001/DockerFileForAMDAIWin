@@ -68,9 +68,9 @@ RUN wget https://mirrors.edge.kernel.org/ubuntu/pool/main/m/mpdecimal/libmpdec2_
 RUN apt-get install -y ./libmpdec2_2.4.2-3_amd64.deb
 
 # Download the AMD GPU installer package
-RUN wget https://repo.radeon.com/amdgpu-install/6.1.3/ubuntu/jammy/amdgpu-install_6.1.60103-1_all.deb
+RUN wget https://repo.radeon.com/amdgpu-install/6.2.3/ubuntu/jammy/amdgpu-install_6.2.60203-1_all.deb
 
-RUN apt-get install -y ./amdgpu-install_6.1.60103-1_all.deb
+RUN apt-get install -y ./amdgpu-install_6.2.60203-1_all.deb
 
 RUN amdgpu-install -y --usecase=wsl,rocm --no-dkms
 
@@ -88,7 +88,11 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1 &
 # Set default python version (optional)
 RUN update-alternatives --set python /usr/bin/python3.10
 
-RUN pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/rocm6.1
+RUN wget https://repo.radeon.com/rocm/manylinux/rocm-rel-6.2.3/torch-2.3.0%2Brocm6.2.3-cp310-cp310-linux_x86_64.whl
+RUN wget https://repo.radeon.com/rocm/manylinux/rocm-rel-6.2.3/torchvision-0.18.0%2Brocm6.2.3-cp310-cp310-linux_x86_64.whl
+RUN wget https://repo.radeon.com/rocm/manylinux/rocm-rel-6.2.3/pytorch_triton_rocm-2.3.0%2Brocm6.2.3.5a02332983-cp310-cp310-linux_x86_64.whl
+
+RUN pip3 install torch-2.3.0+rocm6.2.3-cp310-cp310-linux_x86_64.whl torchvision-0.18.0+rocm6.2.3-cp310-cp310-linux_x86_64.whl pytorch_triton_rocm-2.3.0+rocm6.2.3.5a02332983-cp310-cp310-linux_x86_64.whl
 
 RUN pip3 install -U setuptools
 

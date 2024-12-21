@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  forge_ui:
+    image: forge_ui:latest
+    environment:
+      - LD_LIBRARY_PATH=/usr/lib/wsl/lib
+      - share=True
+      - PIP_BREAK_SYSTEM_PACKAGES=1
+    devices:
+      - /dev/dxg
+    volumes:
+      - type: bind
+        source: /usr/lib/wsl
+        target: /usr/lib/wsl
+      - ./output:/stable-diffusion-webui-forge/output/:rw
+      - ./models:/stable-diffusion-webui-forge/models/:rw
+      - ./configs:/stable-diffusion-webui-forge/configs/:rw
+      - ./outputs:/stable-diffusion-webui-forge/outputs/:rw
+      - ./gfpgan:/stable-diffusion-webui-forge/gfpgan/:rw
+      - ./ESRGAN:/stable-diffusion-webui-forge/ESRGAN/:rw
+      - ./SwinIR:/stable-diffusion-webui-forge/SwinIR/:rw
+      - ./textual_inversion:/stable-diffusion-webui-forge/textual_inversion/:rw
+      - ./extensions:/stable-diffusion-webui-forge/extensions/:rw      
+      - ./config_states:/stable-diffusion-webui-forge/config_states/:rw
+      - ./node_modules:/stable-diffusion-webui-forge/node_modules/:rw   
+      - ./cache:/stable-diffusion-webui-forge/cache/:rw  
+    ports:
+      - "7860:7860"
+    entrypoint: ["python3", "/stable-diffusion-webui-forge/launch.py", "--listen", "--share"]
+    tty: true
