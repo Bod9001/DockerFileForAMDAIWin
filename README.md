@@ -11,12 +11,17 @@ swarmUI, I think the configurations need to be updated, but it's a c# calling co
 
 was able to find a fix for docker consuming all your memory on Windows
 
-also cleaned up the rocker files as well to be a bit more resilient, though is missing git hashes, so now properly update some of the linked githubs and break stuff
+also cleaned up the docker files as well to be a bit more resilient, though is missing git hashes, so now properly update some of the linked githubs and break stuff
 tested on following commits
+
 AUTOMATIC1111 = https://github.com/AUTOMATIC1111/stable-diffusion-webui/commit/82a973c04367123ae98bd9abdf80d9eda9b910e2
+
 ComfyUI = https://github.com/comfyanonymous/ComfyUI/commit/577de83ca9c99e997825439e017113456c4c78f7
+
 forge UI = https://github.com/lllyasviel/stable-diffusion-webui-forge/commit/0ced1d0cd000a536ebd21dc2c8e8636c9104568d
+
 swarmUI = https://github.com/mcmonkeyprojects/SwarmUI/commit/9834101d5f965b0e6822d58c7528da1e7353bd47
+
 
 Update: 05/12/2024 
 
@@ -82,41 +87,63 @@ a hefty amount of RAM since the build likes to consume a lot for some reason bes
 memory=50GB
 swap=50GB
 ```
-(Once you finish building your images It's advisable to turn memory back down to something that doesn't consume all your memory on your computer, 
+(Once you finish building your images It's advisable to turn memory back down to something that doesn't consume all your memory on your computer,
+
 since (docker) Linux does that thing where it thinks it's free memory so fills it up with random stuff but Windows doesn't know about that so you end up with your memory being filled up)
 
 and then  Restart wsl with this in Windows terminal wsl --shutdown
+
 then docker desktop should prompt to restart wsl and you allow it to do  so
 
 ## HOW to steps
 
 First navigate to wsl_2_rocm_docker_win, 
+
 ensuring that you have docker running, and HIP ( for windows installed I'm not too sure if it's needed ),And the latest driver, and you have instant replay turned off (causes a crash)
 
+
 for
+
 forge_ui =  python_310
+
 automatic_1111 =  python_310
+
 swarm_ui = python_312
+
 comfy_ui = python_312
+
 and run the build.bat ( it'll take a while and a lot of system resources, if you want you can open a terminal and run it in that so it doesn't instantly close once it's finished )
 
 once that is finished go to the custom_image folder
+
 Go to the Application you want to run and run build.bat ( again this will take a little bit )
+
 once it has finished successfully 
+
 (if swarm_ui, you need to go to comfy_ui and run the build.bat in there)
+
 run the run.bat 
+
 and if you check docker desktop it should be loading up,
 
 then depending on the application
+
 automatic_1111 = (gradio URL from logs working, localhost not working for some reason localhost:7860)
+
 forge_ui = (gradio URL from logs working, localhost not working for some reason localhost:7860)
+
 comfy_ui = localhost:8188
+
 swarm_ui = localhost:7801
 
 NOTES:
+
 for automatic_1111 and forge_ui
+
 for some reason it doesn't work unless you use the public links that are generated in the docker logs, you can look at them in docker desktop,   example URL  random numbers and characters.gradio.live 
-Haven't been able to work out why just localhost doesn't work, 
+
+Haven't been able to work out why just localhost doesn't work,
+
 
 the initial model loading takes ages for some reason, haven't worked out how to cash it on automatic_1111
 
