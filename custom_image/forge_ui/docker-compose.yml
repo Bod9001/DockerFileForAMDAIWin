@@ -12,7 +12,10 @@ services:
     volumes:
       - type: bind
         source: /usr/lib/wsl
-        target: /usr/lib/wsl
+        target: /usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3
+      - type: bind
+        source: C:\Program Files\WSL\lib
+        target: /usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3
       - ./output:/stable-diffusion-webui-forge/output/:rw
       - ./models:/stable-diffusion-webui-forge/models/:rw
       - ./configs:/stable-diffusion-webui-forge/configs/:rw
@@ -27,5 +30,6 @@ services:
       - ./cache:/stable-diffusion-webui-forge/cache/:rw  
     ports:
       - "7860:7860"
-    entrypoint: ["python3", "/stable-diffusion-webui-forge/launch.py", "--listen", "--share"]
+    entrypoint: ["python3.10", "/stable-diffusion-webui-forge/launch.py", "--listen", "--share", "--skip-python-version-check"]
+    #entrypoint: /bin/sh 
     tty: true

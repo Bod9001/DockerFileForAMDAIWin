@@ -12,10 +12,7 @@ services:
     volumes:
       - type: bind
         source: /usr/lib/wsl
-        target: /usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3
-      - type: bind
-        source: C:\Program Files\WSL\lib
-        target: /usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3
+        target: /usr/lib/wsl
       - ./output:/ComfyUI/output/:rw
       - ./models:/ComfyUI/models/:rw
       - ./custom_nodes:/ComfyUI/custom_nodes/:rw
@@ -24,11 +21,10 @@ services:
     ports:
       - "8188:8188"
     #command: 
-    #entrypoint: ["bash", "-c", "export LD_LIBRARY_PATH=/usr/lib/wsl:$LD_LIBRARY_PATH && python3 /ComfyUI/InstallCustomNodes.py"]
-    entrypoint: ["python3", "/ComfyUI/InstallCustomNodes.py"]
+    #entrypoint: ["python3", "/ComfyUI/InstallCustomNodes.py"]
     #entrypoint: ["python3", "/ComfyUI/main.py", "--listen"]
     #command: rocminfo
-    #entrypoint: /bin/sh  # Use /bin/bash if you prefer Bash
+    entrypoint: /bin/sh  # Use /bin/bash if you prefer Bash
     #command: -c "exec /bin/sh"  # Optional: Run a specific command, if needed
     tty: true
     #stdin_open: true # docker run -i

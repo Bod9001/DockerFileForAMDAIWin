@@ -12,7 +12,10 @@ services:
     volumes:
       - type: bind
         source: /usr/lib/wsl
-        target: /usr/lib/wsl
+        target: /usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3
+      - type: bind
+        source: C:\Program Files\WSL\lib
+        target: /usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3
       - ./Data:/StableSwarmUI/Data:rw
       - ./dlbackend:/StableSwarmUI/dlbackend:rw
       #- ./Models:/StableSwarmUI/Models:rw
@@ -37,7 +40,10 @@ services:
     volumes:
       - type: bind
         source: /usr/lib/wsl
-        target: /usr/lib/wsl
+        target: /usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3
+      - type: bind
+        source: C:\Program Files\WSL\lib
+        target: /usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3
       - ./output:/ComfyUI/output/:rw
       - ./models:/ComfyUI/models/:rw
     ports:

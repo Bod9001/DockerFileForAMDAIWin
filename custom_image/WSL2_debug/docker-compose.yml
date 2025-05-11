@@ -1,6 +1,7 @@
+version: "3.9"
 services:
-  ubuntulatest:
-    image: ubuntu:latest
+  wsl_2_rocm_docker_win:
+    image: wsl_2_rocm_docker_win_py132:latest
     volumes:
       - type: bind
         source: /usr/lib/wsl
@@ -8,4 +9,9 @@ services:
       - type: bind
         source: C:\Program Files\WSL\lib
         target: /usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3
+    devices:
+      - /dev/dxg
     tty: true
+    stdin_open: true
+    #entrypoint: /bin/sh
+    #command: /bin/bash

@@ -1,0 +1,1 @@
+docker build -t wsl_2_rocm_docker_win_py130 .

@@ -13,7 +13,10 @@ services:
     volumes:
       - type: bind
         source: /usr/lib/wsl
-        target: /usr/lib/wsl
+        target: /usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3
+      - type: bind
+        source: C:\Program Files\WSL\lib
+        target: /usr/lib/x86_64-linux-gnu/glibc-hwcaps/x86-64-v3
       - ./repositories:/stable-diffusion-webui/repositories/:rw
       - ./models:/stable-diffusion-webui/models/:rw
       - ./outputs:/stable-diffusion-webui/outputs/:rw
@@ -27,7 +30,7 @@ services:
       - ./cache:/stable-diffusion-webui/cache/:rw  
     ports:
       - "7860:7860"
-    entrypoint: ["python3", "stable-diffusion-webui/launch.py", "--listen" ]
+    entrypoint: ["python3.10", "stable-diffusion-webui/launch.py", "--listen", "--share" , "--api"]
     #entrypoint: /bin/sh  # Use /bin/bash if you prefer Bash
     #command: -c "exec /bin/sh"  # Optional: Run a specific command, if needed
     tty: true

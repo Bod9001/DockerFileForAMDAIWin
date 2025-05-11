@@ -1,4 +1,4 @@
-FROM wsl_2_rocm_docker_win_py132
+FROM rocm/pytorch:latest
 
 # Set the working directory
 WORKDIR /
@@ -15,9 +15,9 @@ RUN sed -i '/torch/d' /ComfyUI/requirements.txt && \
     sed -i '/torchaudio/d' /ComfyUI/requirements.txt
 
 # Install the remaining dependencies
-RUN pip3 install torchsde --break-system-packages
+RUN pip3 install torchsde
 
-RUN pip3 install -r /ComfyUI/requirements.txt --break-system-packages
+RUN pip3 install -r /ComfyUI/requirements.txt
 
 # Expose the necessary port
 EXPOSE 8188
