@@ -1,7 +1,22 @@
 NOTE:
-Update: 21/12/2024 
-so, tested automatic1111 and comfy UI with the updated packages rocm-rel-6.2.3 do note it has to manually remove the dependencies for the Nvidia version of py torch with comfy UI when installing the requirements, so that might be issues with some other ones, 
-anyway, I tried getting the official image running but my computer couldn't even handle downloading it Because I think it tries extracting it then runs out of memory ( even though I have  64 GB, if you know a setting to stop it just gobbling the ram when extracting archives please do say ), but otherwise seems to work, testing flux in comfy UI will be a second
+Update: 12/05/2025
+Half a year later updated to Rocm 6.3.4, 
+
+so, Official images not tested
+forge UI, was able to get a generation out but not sure if it's me trying to run a full fat flux and proceeding to run out of VRAM that's breaking it, 
+so it definitely needs some tweaking and looking to
+automatic1111 ok, 
+comfyUI ok,
+swarmUI, I think the configurations need to be updated, but it's a c# calling comfyUI API so not really AMD/ROCM related
+
+was able to find a fix for docker consuming all your memory on Windows
+
+also cleaned up the rocker files as well to be a bit more resilient, though is missing git hashes, so now properly update some of the linked githubs and break stuff
+tested on following commits
+AUTOMATIC1111 = https://github.com/AUTOMATIC1111/stable-diffusion-webui/commit/82a973c04367123ae98bd9abdf80d9eda9b910e2
+ComfyUI = https://github.com/comfyanonymous/ComfyUI/commit/577de83ca9c99e997825439e017113456c4c78f7
+forge UI = https://github.com/lllyasviel/stable-diffusion-webui-forge/commit/0ced1d0cd000a536ebd21dc2c8e8636c9104568d
+swarmUI = https://github.com/mcmonkeyprojects/SwarmUI/commit/9834101d5f965b0e6822d58c7528da1e7353bd47
 
 Update: 05/12/2024 
 
@@ -10,7 +25,6 @@ https://hub.docker.com/r/rocm/pytorch/tags
 and
 they updated the rocm version for WSL  (Link has docker instructions to)
 https://rocm.docs.amd.com/projects/radeon/en/latest/docs/install/wsl/install-radeon.html
-I need to update the version that's being used in the repo, and do some tests
 
 ~~haven't been able to get flux.dev working it always freezes up the entire computer when processing vae tell me if you manage to get past this for flux.dev~~
 technically fixed it I think it's an issue with VAE steps in the driver, I recently upgraded to 64GB of ram from 32GB, and when the point it would usually crash when doing the VAE, 
@@ -18,8 +32,6 @@ it is when it spikes up in memory and Does the same thing but doesn't crash,
 remedy? if you don't have the hardware may be temporarily increasing your ram cash/whatever it's called file so it can temporarily allocate it, interestingly don't seem to spike after it's done it 1st/2nd time, Probably some JIT compiling on the AMD side using too much memory  
 
 docker is a bit weird inside of the virtual WSL2 Linux so you'll have to run a plane docker composed before it will allow the GPU pass through to work for some reason ( is part of the guide so don't worry too much )
-
-it seems for me every time after a computer restart? I have to run the WSL2_set_up then exit out with ctrl + c then run the thing I want to run otherwise it complains about a missing bind
 
 confirm working with Windows10 and an RX7900XTX 
 
@@ -31,7 +43,18 @@ good news, I found the source of the crash
 it will crash when generating images , when on the final step
 workaround, turn off instant replay, 
 
-the initial model loading takes ages for some reason, haven't worked out how to cash it on automatic_1111
+
+
+## to fix a docker bug where docker will consume all your memory
+```
+wsl --list --running
+wsl -d docker-desktop
+sync; echo 3 | tee /proc/sys/vm/drop_caches
+```
+so it looks like the issues it doesn't clean out the caches so if it starts using a lot of RAM, do the steps above, to go into the docker desktop container and tell it to clean out the cash, 
+with this actually able to download the official AMD images,
+note they haven't been tested
+
 
 
 ## Requires
@@ -65,224 +88,37 @@ since (docker) Linux does that thing where it thinks it's free memory so fills i
 and then  Restart wsl with this in Windows terminal wsl --shutdown
 then docker desktop should prompt to restart wsl and you allow it to do  so
 
-## How to steps for automatic1111
+## HOW to steps
+
+First navigate to wsl_2_rocm_docker_win, 
+ensuring that you have docker running, and HIP ( for windows installed I'm not too sure if it's needed ),And the latest driver, and you have instant replay turned off (causes a crash)
+
+for
+forge_ui =  python_310
+automatic_1111 =  python_310
+swarm_ui = python_312
+comfy_ui = python_312
+and run the build.bat ( it'll take a while and a lot of system resources, if you want you can open a terminal and run it in that so it doesn't instantly close once it's finished )
+
+once that is finished go to the custom_image folder
+Go to the Application you want to run and run build.bat ( again this will take a little bit )
+once it has finished successfully 
+(if swarm_ui, you need to go to comfy_ui and run the build.bat in there)
+run the run.bat 
+and if you check docker desktop it should be loading up,
+
+then depending on the application
+automatic_1111 = (gradio URL from logs working, localhost not working for some reason localhost:7860)
+forge_ui = (gradio URL from logs working, localhost not working for some reason localhost:7860)
+comfy_ui = localhost:8188
+swarm_ui = localhost:7801
+
+NOTES:
+for automatic_1111 and forge_ui
+for some reason it doesn't work unless you use the public links that are generated in the docker logs, you can look at them in docker desktop,   example URL  random numbers and characters.gradio.live 
+Haven't been able to work out why just localhost doesn't work, 
+
+the initial model loading takes ages for some reason, haven't worked out how to cash it on automatic_1111
 
-now, open a terminal in /wsl_2_rocm_docker_win and run docker file (if you haven't Built it already)
-
-docker build -t wsl_2_rocm_docker_win . 
-
-wait for it to finish ( this may take a while )
-
-and then, 
-
-go to /automatic_1111 and do 
-
-docker build -t automatic_1111 . 
-
-wait for it to finish ( this may take a while )
-
-Load up a ubuntu wsl instance,
-
-connect to it using the terminal , searching for ubuntu should bring up the terminal in Windows
-
-and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
-
-then run
-
-( remembering you have set up the docker integration )
-
-sudo docker compose up 
-
-wait for it to download and when it says it's running in docker desktop then press
-
-ctrl+c to exit out of it (or close  in docker desktop )
-
-go to 
-
-and then navigate to the compose in automatic_1111 and do
-
-
-sudo docker compose up
-
-(it will download a few extra requirements since not quite sure how to pin them down)
-
-and then it should load up, 
-
-you need to then get the internal IP of your wsl container
-
-wsl --list --verbose
-
-then pick out the name for the one you're running the Docker compose on
-
-wsl -d ```<DistributionName>``` hostname -I
-
-that should give you an IP then simply do ```http://<foundIP>:7860/```
-
-and then you should be connected to the UI
-
-it will take a while since the model loading takes ages you can observe by your RAM slowly climbing, best to wait for it
-
-then have fun!
-
-## How to steps for comfyUI
-
-now, open a terminal in /wsl_2_rocm_docker_win and run docker file (if you haven't Built it already)
-
-docker build -t wsl_2_rocm_docker_win . 
-
-wait for it to finish ( this may take a while )
-
-and now, 
-
-go to /comfy_ui and do 
-
-docker build -t comfy_ui . 
-
-wait for it to finish ( this may take a while )
-
-Load up a ubuntu wsl instance,
-
-connect to it using the terminal , searching for ubuntu should bring up the terminal in Windows
-
-and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
-
-then run 
-
-( remembering you have set up the docker integration )
-
-sudo docker compose up
-
-wait for it to download and when it says it's running in docker desktop then press
-
-ctrl+c to exit out of it (or close  in docker desktop )
-
-go to 
-
-navigate to the docker compose in comfy_ui and do
-
-sudo docker compose up
-and then it should load up, 
-
-(Of course then provide your own model in the models/checkpoints folder)
-
-you need to then get the internal IP of your wsl container
-
-wsl --list --verbose
-
-then pick out the name for the one you're running the Docker compose on
-
-wsl -d ```<DistributionName>``` hostname -I
-
-that should give you an IP then simply do ```http://<foundIP>:8188/```
-
-and then you should be connected to the UI
-
-if you got the model installed the and everything setup it should work! have fun
-
-## How to steps for Swarm UI
-so, First off follow the comfy UI  steps until  Load up a ubuntu wsl instance,
-now 
-go to /swarm_ui and do 
-
-docker build -t swarm_ui . 
-
-wait for it to finish ( this may take a while )
-
-and now 
-Load up a ubuntu wsl instance,
-
-connect to it using the terminal , searching for ubuntu should bring up the terminal in Windows
-
-and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
-
-then run 
-
-then run 
-
-( remembering you have set up the docker integration )
-
-sudo docker compose up
-
-wait for it to download and when it says it's running in docker desktop then press
-
-ctrl+c to exit out of it (or close  in docker desktop )
-
-go to 
-
-navigate to the docker compose in swarm_ui and do
-
-sudo docker compose up
-and then it should load up, 
-
-(Of course then provide your own model in the models/checkpoints/OfficialStableDiffusion ( So it aligns nicely with what swarm UI Wants ) folder)
-
-you need to then get the internal IP of your wsl container
-
-wsl --list --verbose
-
-then pick out the name for the one you're running the Docker compose on
-
-wsl -d ```<DistributionName>``` hostname -I
-
-that should give you an IP then simply do ```http://<foundIP>:7801/```
-
-and then you should be connected to the UI
-
-if you got the model installed the and everything setup it should work! have fun
-
-## How to steps for forge_ui
-
-
-now, open a terminal in /wsl_2_rocm_docker_win and run docker file (if you haven't Built it already)
-
-docker build -t wsl_2_rocm_docker_win . 
-
-wait for it to finish ( this may take a while )
-
-and then, 
-
-go to /forge_ui and do 
-
-docker build -t forge_ui . 
-
-wait for it to finish ( this may take a while )
-
-Load up a ubuntu wsl instance,
-
-connect to it using the terminal , searching for ubuntu should bring up the terminal in Windows
-
-and now, go to WSL2_set_up ( why? because for some reason if you don't run a normal docker then, run the one with the GPU Pass through  it bugs out weirdly and says it can't find the GPU )
-
-then run
-
-( remembering you have set up the docker integration )
-
-sudo docker compose up 
-
-wait for it to download and when it says it's running in docker desktop then press
-
-ctrl+c to exit out of it (or close  in docker desktop )
-
-go to 
-
-and then navigate to the compose in forge_ui and do
-
-sudo docker compose up
-
-(it will download a few extra requirements since not quite sure how to pin them down)
-
-and then it should load up, 
-
-you need to then get the internal IP of your wsl container
-
-wsl --list --verbose
-
-then pick out the name for the one you're running the Docker compose on
-
-wsl -d ```<DistributionName>``` hostname -I
-
-that should give you an IP then simply do ```http://<foundIP>:7860/```
-
-and then you should be connected to the UI
 
 then have fun!
