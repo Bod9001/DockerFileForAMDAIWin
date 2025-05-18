@@ -112,6 +112,8 @@ swarm_ui = python_312
 
 comfy_ui = python_312
 
+tabby_api_rocm = python_312
+
 and run the build.bat ( it'll take a while and a lot of system resources, if you want you can open a terminal and run it in that so it doesn't instantly close once it's finished )
 
 once that is finished go to the custom_image folder
@@ -147,5 +149,13 @@ Haven't been able to work out why just localhost doesn't work,
 
 the initial model loading takes ages for some reason, haven't worked out how to cash it on automatic_1111
 
+for tabby_api_rocm 
+this also runs a silly Tavern instance
+do know you need to manually download the models Beforehand simply go intoo the models folder and there is a how to guide,
+You also need to go into dataAPI/config.yml 
+and set the model name like so model_name: aya-expanse-32b-exl2-4bpw
+and in the silly tavern UI
+set http://tabby_api_rocm:5000/ as the api URL 
+Make sure to restart the API container If you set the model
 
 then have fun!
