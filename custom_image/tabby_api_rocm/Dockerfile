@@ -33,18 +33,21 @@ RUN pip3 install -r requirements.txt --break-system-packages
 
 RUN mkdir -p /lib/glibc-hwcaps/x86-64-v3
 
-RUN apt-get update && apt-get install -y coreutils
+
+RUN apt-get update && apt-get install -y curl 
 
 #libd3d12.so
-RUN echo "UklGRngAAABXQVZFZm10IBAAAAABAAEAgD4AAAB9AAACABAAZGF0YQAAAAA=" | base64 -d > /lib/glibc-hwcaps/x86-64-v3/libd3d12.so
+RUN curl -L https://raw.githubusercontent.com/Bod9001/DockerFileForAMDAIWin/refs/heads/main/custom_image/tabby_api_rocm/lib/libd3d12.so \
+    -o /lib/glibc-hwcaps/x86-64-v3/libd3d12.so
+
 
 #libd3d12core.so
-RUN echo "UklGRngAAABXQVZFZm10IBAAAAABAAEAgD4AAAB9AAACABAAZGF0YQAAAAA=" | base64 -d > /lib/glibc-hwcaps/x86-64-v3/libd3d12core.so
+RUN curl -L https://raw.githubusercontent.com/Bod9001/DockerFileForAMDAIWin/refs/heads/main/custom_image/tabby_api_rocm/lib/libd3d12core.so \
+    -o /lib/glibc-hwcaps/x86-64-v3/libd3d12core.so
 
 #libdxcore.so
-RUN echo "UklGRngAAABXQVZFZm10IBAAAAABAAEAgD4AAAB9AAACABAAZGF0YQAAAAA=" | base64 -d > /lib/glibc-hwcaps/x86-64-v3/libdxcore.so
-
-
+RUN curl -L https://raw.githubusercontent.com/Bod9001/DockerFileForAMDAIWin/refs/heads/main/custom_image/tabby_api_rocm/lib/libdxcore.so \
+    -o /lib/glibc-hwcaps/x86-64-v3/libdxcore.so
 
 RUN ls /lib/glibc-hwcaps/x86-64-v3
 
