@@ -1,0 +1,1 @@
+docker build -t tabby_api_rocm .

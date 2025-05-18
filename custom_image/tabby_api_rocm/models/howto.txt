@@ -1,0 +1,6 @@
+Set the name
+ set the name in the configurations file
+then download with
+hfdownloader_windows_amd64_1.4.2.exe -j TheBloke/vicuna-13b-v1.3.0-GGML:q4_0
+
+https://github.com/bodaay/HuggingFaceModelDownloader

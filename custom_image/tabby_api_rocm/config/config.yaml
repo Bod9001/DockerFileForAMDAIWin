@@ -1,0 +1,109 @@
+dataRoot: ./data
+listen: false
+protocol:
+  ipv4: true
+  ipv6: false
+dnsPreferIPv6: false
+autorunHostname: auto
+port: 8000
+autorunPortOverride: -1
+whitelistMode: false
+enableForwardedWhitelist: true
+whitelist:
+  - ::1
+  - 127.0.0.1
+  - 172.23.0.1
+basicAuthMode: true
+basicAuthUser:
+  username: user
+  password: user
+enableCorsProxy: false
+enableUserAccounts: false
+enableDiscreetLogin: false
+sessionTimeout: 86400
+disableCsrfProtection: false
+securityOverride: false
+autorun: true
+avoidLocalhost: false
+allowKeysExposure: false
+skipContentCheck: false
+whitelistImportDomains:
+  - localhost
+  - cdn.discordapp.com
+  - files.catbox.moe
+  - raw.githubusercontent.com
+  - char-archive.evulid.cc
+requestOverrides: []
+extras:
+  promptExpansionModel: Cohee/fooocus_expansion-onnx
+openai:
+  randomizeUserId: false
+  captionSystemPrompt: ""
+deepl:
+  formality: default
+mistral:
+  enablePrefix: false
+ollama:
+  keepAlive: -1
+  batchSize: -1
+claude:
+  enableSystemPromptCache: false
+  cachingAtDepth: -1
+enableServerPlugins: false
+thumbnails:
+  enabled: true
+  quality: 95
+  format: jpg
+  dimensions:
+    bg:
+      - 160
+      - 90
+    avatar:
+      - 96
+      - 144
+backups:
+  chat:
+    enabled: true
+    maxTotalBackups: -1
+    throttleInterval: 10000
+    checkIntegrity: true
+  common:
+    numberOfBackups: 50
+extensions:
+  enabled: true
+  models:
+    autoDownload: true
+    classification: Cohee/distilbert-base-uncased-go-emotions-onnx
+    captioning: Xenova/vit-gpt2-image-captioning
+    embedding: Cohee/jina-embeddings-v2-base-en
+    speechToText: Xenova/whisper-small
+    textToSpeech: Xenova/speecht5_tts
+  autoUpdate: true
+listenAddress:
+  ipv4: 0.0.0.0
+  ipv6: "[::]"
+ssl:
+  enabled: false
+  certPath: ./certs/cert.pem
+  keyPath: ./certs/privkey.pem
+whitelistDockerHosts: true
+requestProxy:
+  enabled: false
+  url: socks5://username:password@example.com:1080
+  bypass:
+    - localhost
+    - 127.0.0.1
+autheliaAuth: false
+perUserBasicAuth: false
+logging:
+  enableAccessLog: true
+  minLogLevel: 0
+rateLimiting:
+  preferRealIpHeader: false
+performance:
+  lazyLoadCharacters: false
+  memoryCacheCapacity: 100mb
+  useDiskCache: true
+enableDownloadableTokenizers: true
+promptPlaceholder: "[Start a new chat]"
+enableServerPluginsAutoUpdate: true
